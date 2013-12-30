@@ -30,6 +30,8 @@ def main():
     parser = argparse.ArgumentParser(description='Blogger client')
     parser.add_argument('-b', '--blog', action='store',
                         help='title of the blog to receive the new draft')
+    parser.add_argument('-p', '--post', action='store_true',
+                        help='post the entry directly')
     parser.add_argument('filename', action='store',
                         help='reST input file')
     options = parser.parse_args()
@@ -110,8 +112,9 @@ def main():
     else:
         # The post was not found, so make a new one
         print 'Creating new post'
-        client.add_post(target_blog_id, post_title, post_content, draft=True)
-    print 'Uploaded new draft'
+        client.add_post(target_blog_id, post_title, post_content, draft=(not options.post))
+    if not options.post:
+        print 'Uploaded new draft'
     return
 
 if __name__ == '__main__':
