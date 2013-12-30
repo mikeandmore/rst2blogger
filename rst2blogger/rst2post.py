@@ -32,6 +32,7 @@ def format_post_from_string(body, initial_header_level=4):
             settings_overrides={'initial_header_level': initial_header_level,
                                 'generator': False,
                                 'traceback': True,
+                                'syntax_highlight': 'short',
                                 },
             )
         if not html:
